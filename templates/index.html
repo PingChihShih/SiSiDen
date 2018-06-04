@@ -6,10 +6,11 @@
 -->
 <html>
 	<head>
-		<title>Intensify by TEMPLATED</title>
+		<title>SiSiDen.com</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		{% load static %}
+		<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
 	</head>
 	<body>
 
@@ -18,7 +19,7 @@
 				<nav class="left">
 					<a href="#menu"><span>Menu</span></a>
 				</nav>
-				<a href="index.html" class="logo">SiSiDen.com</a>
+				<a href="{% url 'index' %}" class="logo">SiSiDen.com</a>
 				<nav class="right">
 					<a href="#" class="button alt">Log in</a>
 				</nav>
@@ -27,22 +28,22 @@
 		<!-- Menu -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">首頁</a></li>
-					<li><a href="generic.html">婚禮籌劃</a></li>
-					<li><a href="elements.html">受邀的婚禮</a></li>
+					<li><a href="{% url 'index' %}">Home</a></li>
+					<li><a href="{% url 'plan' %}">Wedding Planing</a></li>
+					<li><a href="{% url 'attend' %}">Wedding to Attend</a></li>
 				</ul>
 				<ul class="actions vertical">
-					<li><a href="#" class="button fit">登入</a></li>
+					<li><a href="#" class="button fit">Login</a></li>
 				</ul>
 			</nav>
 
 		<!-- Banner -->
 			<section id="banner">
 				<div class="content">
-					<h1>婚禮最好的選擇</h1>
-					<p>一些說明 <br />另一些說明</p>
+					<h1>Best Choice for Wedding</h1>
+					<p>We devoted for best weddings<br />And, we will never give up.</p>
 					<ul class="actions">
-						<li><a href="#one" class="button scrolly">開始使用</a></li>
+						<li><a href="#one" class="button scrolly">Get Started</a></li>
 					</ul>
 				</div>
 			</section>
@@ -51,35 +52,27 @@
 			<section id="one" class="wrapper">
 				<div class="inner flex flex-3">
 					<div class="flex-item left">
-						<!-- <div>
-							<h3>過去有什麼問題？</h3>
-							<h4><font color="grey">觸及率低</font></h4>
-							<p>現代租屋族，常搬家<br>因為隱私問題，地址不公開</p>
-							<h4><font color="grey">溝通效率</font></h4>
-							<p>婚禮前三個月寄出，前一個月才收到回覆
-							<br>參與人數無法有效整理
-							<br>耗時費力，勞民傷財</p>
-							<h4><font color="grey">無法精準行銷</font></h4>
-							<p>無法有效率只將訊息給特定對象</p>
-						</div> -->
 						<div>
-							<h3>Wedding Registry</h3>
-							<p>在網路中媒合要送之禮物
-							<br>禮物可以部分出資 </p>
+							<h3>What Problems Before?</h3>
+							<p>Low Efficiency <br /> Low Engagement Rate<br /> No Precision Marketing</p>
+						</div>
+						<div>
+							<h3>Wedding Assistant</h3>
+							<p>Attendance Handle<br /> Date Picking<br /> Venue Booking & Rating</p>
 						</div>
 					</div>
 					<div class="flex-item image fit round">
-						<img src="images/pic01.jpg" alt="" />
+						{% load static %}
+						<img src="{% static "images/pic01.jpg" %}" alt="" />
 					</div>
 					<div class="flex-item right">
 						<div>
-							<h3>電子商務</h3>
-							<p>結合禮品商，客製化
-							<br>及時送禮，即時行銷</p>
+							<h3>E-Gifting</h3>
+							<p>Wedding Registry<br /> Crowdfunding Gifting<br />Work with Gift Company<br /> Customization</li>
 						</div>
 						<div>
-							<h3>Suscipit nibh dolore</h3>
-							<p>Pellentesque egestas sem. Suspendisse<br /> modo ullamcorper feugiat lorem.</p>
+							<h3>Wedding Community</h3>
+							<p>Guests' Wishes Bulletin<br/ > Table Managing: A Better Way to Celebrate</p>
 						</div>
 					</div>
 				</div>
@@ -88,14 +81,14 @@
 		<!-- Two -->
 			<section id="two" class="wrapper style1 special">
 				<div class="inner">
-					<h2>Feugiat lorem</h2>
+					<h2>Our Mission</h2>
 					<figure>
 					    <blockquote>
-					        "Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra<br /> magna etiam lorem ultricies in diam. Sed arcu cras consequat."
+					        "When I saw a figure on the wall, <br /> it came all of a sudden."
 					    </blockquote>
 					    <footer>
-					        <cite class="author">Jane Anderson</cite>
-					        <cite class="company">CEO, Untitled</cite>
+					        <cite class="author">Jonah Wu</cite>
+					        <cite class="company">CEO, CNL Team 13</cite>
 					    </footer>
 					</figure>
 				</div>
@@ -106,7 +99,8 @@
 				<div class="inner flex flex-3">
 					<div class="flex-item box">
 						<div class="image fit">
-							<img src="images/pic02.jpg" alt="" />
+							{% load static %}
+							<img src="{% static "images/pic02.jpg" %}" alt="" />
 						</div>
 						<div class="content">
 							<h3>Consequat</h3>
@@ -115,7 +109,8 @@
 					</div>
 					<div class="flex-item box">
 						<div class="image fit">
-							<img src="images/pic03.jpg" alt="" />
+							{% load static %}
+							<img src="{% static "images/pic03.jpg" %}" alt="" />
 						</div>
 						<div class="content">
 							<h3>Adipiscing</h3>
@@ -124,7 +119,8 @@
 					</div>
 					<div class="flex-item box">
 						<div class="image fit">
-							<img src="images/pic04.jpg" alt="" />
+							{% load static %}
+							<img src="{% static "images/pic04.jpg" %}" alt="" />
 						</div>
 						<div class="content">
 							<h3>Malesuada</h3>
@@ -150,11 +146,12 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			{% load static %}
+			<script src="{% static "assets/js/jquery.min.js" %}"></script>
+			<script src="{% static "assets/js/jquery.scrolly.min.js" %}"></script>
+			<script src="{% static "assets/js/skel.min.js" %}"></script>
+			<script src="{% static "assets/js/util.js" %}"></script>
+			<script src="{% static "assets/js/main.js" %}"></script>
 
 	</body>
 </html>
