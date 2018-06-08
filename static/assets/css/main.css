@@ -223,6 +223,7 @@
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
+		margin: auto; /* add by DS*/
 	}
 
 	.row > * {
@@ -1587,6 +1588,8 @@
 		max-width: 65em;
 	}
 
+	.
+
 		@media screen and (max-width: 1280px) {
 
 			.inner {
@@ -1870,6 +1873,23 @@
 		width: 100%;
 	}
 
+	input[type="number"] { /* add by DS */
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		background: rgba(144, 144, 144, 0.075);
+		border-radius: 4px;
+		border: none;
+		border: solid 1px #dee1e3;
+		color: inherit;
+		display: block;
+		outline: 0;
+		padding: 0 1em;
+		text-decoration: none;
+		width: 70%;
+	}
+
 		input[type="text"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
@@ -1989,8 +2009,8 @@
 
 		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
-			background: #f6755e;
-			border-color: #f6755e;
+			background: #78300f;
+			border-color: #78300f;
 			color: #ffffff;
 			content: '\f00c';
 		}
@@ -2396,7 +2416,7 @@
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		background-color: #f6755e;
+		background-color: #78300f;
 		border-radius: 4px;
 		border: 0;
 		color: #ffffff;
@@ -2412,12 +2432,26 @@
 		text-transform: uppercase;
 	}
 
+	.inc_dec_button {
+		margin: 0 0 0 5px;
+	  text-indent: -9999px;
+	  cursor: pointer;
+	  width: 29px;
+	  height: 29px;
+	  float: left;
+	  text-align: center;
+		background: url("/templates/static/images/buttons.png") no-repeat;
+	}
+	.dec {
+  	background-position: 0 -29px;
+	}
+
 		input[type="submit"]:hover,
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #f78a76;
+			background-color: #8d5b44;
 		}
 
 		input[type="submit"]:active,
@@ -2475,7 +2509,7 @@
 		input[type="button"].alt,
 		button.alt,
 		.button.alt {
-			background-color: transparent;
+			background-color: #c9b0ac;
 			box-shadow: inset 0 0 0 1px #dee1e3;
 			color: #727a82 !important;
 		}
@@ -2669,7 +2703,7 @@
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
-		background: #fff;
+		background: #c9b0ac; /* modify by DS */
 		cursor: default;
 		height: 6em;
 		left: 0;
@@ -2683,7 +2717,7 @@
 	}
 
 		#header .logo {
-			color: #f6755e;
+			color: #78300F; /* modify by DS */
 			font-family: "Pacifico", cursive;
 			font-size: 2.5em;
 			letter-spacing: 2px;
@@ -2794,7 +2828,7 @@
 		-ms-transition: -ms-transform 0.5s ease, visibility 0.5s;
 		transition: transform 0.5s ease, visibility 0.5s;
 		-webkit-overflow-scrolling: touch;
-		background: #25a2c3;
+		background: #8d5b44;
 		color: #ffffff;
 		height: 100%;
 		max-width: 80%;
@@ -3136,7 +3170,7 @@
 
 	#footer {
 		padding: 6em 0 4em 0;
-		background: #25a2c3;
+		background: #25a2c3; /* todo */
 		text-align: center;
 		color: #c8e7f0;
 	}

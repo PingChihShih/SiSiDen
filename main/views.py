@@ -1,11 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-def index(request):
-	return render(request, 'index.html')
+def order(request):
+	return render(request, 'order.html')
 
-def plan(request):
-	return render(request, 'plan.html')
-
-def attend(request):
-	return render(request, 'attend.html')
+def result(request):
+	return render(request, 'result.html')

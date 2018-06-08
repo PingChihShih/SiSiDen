@@ -1,0 +1,12 @@
+-* Add by DS *-
+  deep brown #78300f
+  mid brown #8d5b44
+  light brown #c9b0ac
+  orange brown #b6562a
+
+-* original from templated *-
+  kind of water blue #25a2c3
+  grey #767d85
+  grey2 #dee1e3
+  orange #f6755e
+  bright orange #c9b0ac

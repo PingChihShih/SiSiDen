@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<!--
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="zh-Hant-TW">
+	<head>
+		<title>CNL咖啡</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		{% load static %}
+		<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
+	</head>
+	<body>
+
+		<!-- Header:置頂欄 -->
+			<header id="header">
+				<nav class="left">
+					<a href="#menu"><span>Menu</span></a>
+				</nav>
+				<a href="{% url 'index' %}" class="logo">CNL café</a>
+				<!-- <nav class="right">
+					<a href="#" class="button alt">Log in</a>
+				</nav> -->
+        <nav class="right">
+					<a href="{% url 'order' %}" class="button">回菜單頁</a>
+				</nav>
+			</header>
+
+		<!-- Menu:側欄 -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="{% url 'index' %}">點餐</a></li>
+					<li><a href="{% url 'result' %}">查看結果</a></li>
+				</ul>
+				<ul class="actions vertical">
+					<li><a href="#" class="button fit">Login</a></li>
+				</ul>
+			</nav>
+		<!-- Main:已選餐點 -->
+			<section class="wrapper">
+				<div class="inner flex flex-3">
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">品項</th>
+								<th scope="col">冷熱</th>
+								<th scope="col">甜度</th>
+								<th scope="col">數量</th>
+								<th scope="col">其他備註</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for song in result %}
+							<tr>
+								<td>{{ song.name }}</td>
+								<td>{{ song.owner }}</td>
+								<td>{{ song.key_of_song }}</td>
+								<td>{{ song.highest_note }}</td>
+								<td>{{ song.lowest_note }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+				<!-- <p>共 {{number_of_info}} 樣餐點</p> -->
+
+				<section class="wrapper">
+					<form action="{% url 'result' %}">
+						<center>
+							<a href="{% url 'order' %}" class="button">回上一頁</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="submit" value="送出">
+						</center>
+					</form>
+	      </section>
+
+			</section>
+
+
+
+
+		<!-- Scripts -->
+			{% load static %}
+			<script src="{% static "assets/js/jquery.min.js" %}"></script>
+			<script src="{% static "assets/js/jquery.scrolly.min.js" %}"></script>
+			<script src="{% static "assets/js/skel.min.js" %}"></script>
+			<script src="{% static "assets/js/util.js" %}"></script>
+			<script src="{% static "assets/js/main.js" %}"></script>
+
+	</body>
+</html>
