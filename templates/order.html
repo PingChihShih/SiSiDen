@@ -50,28 +50,36 @@
 							<img src="{% static "images/pic02.jpg" %}" alt="" />
 						</div>
 						<div class="content">
-							<h3>咖啡1</h3>
-							<p>敘述, ...</p>
               <form method="post" action="">
+								{% csrf_token %}
+								<h3>{{ item.name }}</h3>
+								<p>{{ item.description }}</p>
                 <div class="inner flex">
-                  <select>
-                    <option value="iced">冰</option>
+									{{ form.temp }}
+                  <!-- <select id="temp">
+                    <option value="iced">正常冰</option>
                     <option value="little-iced">少冰</option>
                     <option value="cool">去冰</option>
                     <option value="hot">熱</option>
-                  </select>
+                  </select> -->
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <select>
+									{{ form.sugar }}
+                  <!-- <select id="sugar">
                     <option value="normal-sugar">正常糖</option>
                     <option value="little-sugar">少糖</option>
                     <option value="no-sugar">無糖</option>
-                  </select>
+                  </select> -->
                 </div>
                 &nbsp;
-                <div class="inner flex">
+                <div class="inner flex in-order">
                   <label>數量</label>
-									<input class="number-input" type="number" name="quantity" value="0" width="20">
-                </div>
+									{{ form.count }}
+									<!-- <input type="number" name="count" value="0" class="number-input" width="20"> -->
+								</div>
+								&nbsp;
+								<div class="inner flex in-order">
+									<input class="in-order" type=submit value=送出 width="20">
+								</div>
               </form>
 						</div>
 					</div>

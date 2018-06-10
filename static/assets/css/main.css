@@ -1624,6 +1624,14 @@
 		line-height: 1.65;
 	}
 
+	input.in-order[type=submit] { /* add by DS */
+		color: #ffffff;
+		font-family: "Open Sans", Arial, Helvetica, sans-serif;
+		font-size: 12pt;
+		font-weight: 240;
+		width: 16em;  height: 4em;
+	}
+
 		@media screen and (max-width: 1680px) {
 
 			body, input, select, textarea {

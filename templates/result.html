@@ -48,17 +48,15 @@
 								<th scope="col">冷熱</th>
 								<th scope="col">甜度</th>
 								<th scope="col">數量</th>
-								<th scope="col">其他備註</th>
 							</tr>
 						</thead>
 						<tbody>
-							{% for song in result %}
+							{% for single_order in order %}
 							<tr>
-								<td>{{ song.name }}</td>
-								<td>{{ song.owner }}</td>
-								<td>{{ song.key_of_song }}</td>
-								<td>{{ song.highest_note }}</td>
-								<td>{{ song.lowest_note }}</td>
+								<td>{{ single_order.name }}</td>
+								<td>{{ single_order.temp }}</td>
+								<td>{{ single_order.sugar }}</td>
+								<td>{{ single_order.count }}</td>
 							</tr>
 							{% endfor %}
 						</tbody>
