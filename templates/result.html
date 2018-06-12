@@ -62,11 +62,28 @@
 						</tbody>
 					</table>
 				</div>
-
-				<!-- <p>共 {{number_of_info}} 樣餐點</p> -->
+				<div class="inner flex flex-3">
+					<p>共 {{number_of_list}} 樣餐點</p>
+				</div>
+				<div class="inner flex flex-3">
+					<p>{{ ack_msg }}</p>
+				</div>
+				
+				<div class="inner flex flex-3">
+					<form action="{% url 'result' %}">
+						{% if ack_msg == "" %}
+						{% for field in form %}
+							<div text-align="center">
+					      {{ field }}
+							</div>
+				    {% endfor %}
+						{% endif %}
+					</form>
+				</div>
 
 				<section class="wrapper">
-					<form action="{% url 'result' %}">
+					<form method="post" action="{% url 'result' %}">
+						{% csrf_token %}
 						<center>
 							<a href="{% url 'order' %}" class="button">回上一頁</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

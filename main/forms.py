@@ -9,13 +9,21 @@ class SingleOrderForm(forms.Form):
     )
     temp = forms.CharField(widget=forms.Select(choices=temp_choices))
     sugar_choices = (
-        ("normal-sugar", "正常糖"),
-        ("little-sugar", "少糖"),
-        ("no-sugar", "無糖"),
+        ("normal", "正常糖"),
+        ("little", "少糖"),
+        ("no", "無糖"),
     )
     sugar = forms.CharField(widget=forms.Select(choices=sugar_choices))
-    count = forms.CharField(max_length=30,
+    count = forms.IntegerField(
         widget=forms.NumberInput(attrs={'name': 'count',
                                         'value': '0',
                                         'width': '20',
                                         'class': 'number-input'}))
+
+class TableForm(forms.Form):
+    table_id = forms.CharField(max_length=3,
+        widget=forms.TextInput(attrs={'id': 'table_id',
+                                      'placeholder':'請輸入桌號'}))
+    password = forms.CharField(max_length=16,
+        widget=forms.TextInput(attrs={'id': 'password',
+                                      'placeholder':'請輸入密碼'}))
