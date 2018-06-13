@@ -26,15 +26,17 @@
 					<a href="#" class="button alt">Log in</a>
 				</nav> -->
         <nav class="right">
-					<a href="{% url 'result' %}" class="button">點餐結果</a>
+					<a href="{% url 'check' %}" class="button">確認餐點</a>
+					<a href="{% url 'result' %}" class="button">查看已點</a>
 				</nav>
 			</header>
 
 		<!-- Menu:側欄 -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="{% url 'index' %}">點餐</a></li>
-					<li><a href="{% url 'result' %}">查看結果</a></li>
+					<li><a href="{% url 'order' %}">點餐</a></li>
+					<li><a href="{% url 'check' %}">確認餐點</a></li>
+					<li><a href="{% url 'result' %}">查看已點</a></li>
 				</ul>
 				<ul class="actions vertical">
 					<li><a href="#" class="button fit">Login</a></li>
@@ -172,7 +174,7 @@
 
     <!-- 前往下一頁 -->
       <section>
-        <form action="{% url 'result' %}">
+        <form action="{% url 'check' %}">
           <center><input type="submit" value="確認餐點" /></center>
         </form>
       </section>

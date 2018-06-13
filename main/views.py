@@ -39,23 +39,40 @@ def order(request):
 	arg = {'item': item, 'form': form}
 	return render(request, 'order.html', arg)
 
-def result(request):
+def check(request):
 	target_order_id = 1
-	orders = SingleOrder.objects.filter(order_id=target_order_id)
+	orders = SingleOrder.objects.filter(order_id=target_order_id, status='ongoing')
 	for single_order in orders:
 		single_order.temp = temp_match[single_order.temp]
 		single_order.sugar = sugar_match[single_order.sugar]
-
-	ack_msg = ""
-	# TODO check if the order is done
-	if request.method == 'POST':
-		ack_msg = "已成功點餐"
 
 	# TODO table UI and Certification
 	form = TableForm()
 	number_of_list = len(orders)
 	arg = {'order': orders,
 		   'number_of_list': number_of_list,
-		   'form': form,
+		   'form': form}
+	return render(request, 'check.html', arg)
+
+def result(request):
+	target_order_id = 1
+	if request.method == 'POST':
+		print("Order Success!")
+		ack_msg = "已成功點餐"
+		new_orders = SingleOrder.objects.filter(order_id=target_order_id, status='ongoing')
+		for single_order in new_orders:
+			single_order.status = "submitted"
+	orders = SingleOrder.objects.filter(order_id=target_order_id, status='submitted')
+	for single_order in orders:
+		single_order.temp = temp_match[single_order.temp]
+		single_order.sugar = sugar_match[single_order.sugar]
+
+	ack_msg = ""
+	# TODO check if the order is done
+
+
+	number_of_list = len(orders)
+	arg = {'order': orders,
+		   'number_of_list': number_of_list,
 		   'ack_msg': ack_msg}
 	return render(request, 'result.html', arg)

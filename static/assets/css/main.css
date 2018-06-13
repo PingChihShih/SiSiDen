@@ -86,6 +86,12 @@
 		width: 80em;
 	}
 
+	div.centered { /* add by DS */
+		height:200px;
+    width:200px;
+    text-align:center;
+	}
+
 	@media screen and (max-width: 1680px) {
 
 		.container.\31 25\25 {
@@ -2089,6 +2095,10 @@
 			border: 0;
 			border-radius: 0;
 			padding: 0;
+		}
+
+		.centered-input { /* add by DS */
+			width: 30px;
 		}
 
 /* Icon */

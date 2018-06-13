@@ -23,7 +23,9 @@ class SingleOrderForm(forms.Form):
 class TableForm(forms.Form):
     table_id = forms.CharField(max_length=3,
         widget=forms.TextInput(attrs={'id': 'table_id',
-                                      'placeholder':'請輸入桌號'}))
+                                      'placeholder':'請輸入桌號',
+                                      'class': 'centered-input'}))
     password = forms.CharField(max_length=16,
         widget=forms.TextInput(attrs={'id': 'password',
-                                      'placeholder':'請輸入密碼'}))
+                                      'placeholder':'請輸入密碼',
+                                      'class': 'centered-input'}))
