@@ -50,15 +50,21 @@
 								<th scope="col">冷熱</th>
 								<th scope="col">甜度</th>
 								<th scope="col">數量</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
 							{% for single_order in order %}
 							<tr>
-								<td>{{ single_order.name }}</td>
-								<td>{{ single_order.temp }}</td>
-								<td>{{ single_order.sugar }}</td>
-								<td>{{ single_order.count }}</td>
+								<form method="post" action="{% url 'check' %}">
+									{% csrf_token %}
+									<td>{{ single_order.name }}</td>
+									<td>{{ single_order.temp }}</td>
+									<td>{{ single_order.sugar }}</td>
+									<td>{{ single_order.count }}</td>
+									<input type="hidden" name="order_id" value="{{single_order.id}}">
+									<input type="submit" value="刪除">
+								</form>
 							</tr>
 							{% endfor %}
 						</tbody>
@@ -68,29 +74,15 @@
 					<p>共 {{number_of_list}} 樣餐點，確認後請輸入「桌號」與「密碼」後送出</p>
 				</div>
 
-				<!-- <div class="inner flex flex-3">
-					<form action="{% url 'result' %}">
-						{% for field in form %}
-							<div text-align="center">
-					      {{ field }}
-							</div>
-				    {% endfor %}
-					</form>
-				</div> -->
-
 				<section class="wrapper">
 					<form method="post" action="{% url 'result' %}">
 						{% csrf_token %}
 						<center>
 							<div class="inner centered">
-							{% for field in form %}
-						      {{ field }}
-							&nbsp;
-					    {% endfor %}
+								{{ form.table }}
+								{{ form.password }}
+								<input type="submit" value="確認送出">
 							</div>
-							<a href="{% url 'order' %}" class="button">回餐點頁</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="submit" value="確認送出">
 						</center>
 					</form>
 	      </section>

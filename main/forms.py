@@ -21,7 +21,7 @@ class SingleOrderForm(forms.Form):
                                         'class': 'number-input'}))
 
 class TableForm(forms.Form):
-    table_id = forms.CharField(max_length=3,
+    table = forms.CharField(max_length=3,
         widget=forms.TextInput(attrs={'id': 'table_id',
                                       'placeholder':'請輸入桌號',
                                       'class': 'centered-input'}))
