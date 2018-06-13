@@ -6,8 +6,8 @@ class Item(models.Model):
 	name = models.CharField(max_length=50)
 	description = models.CharField(max_length=100)
 
-class Table(models.Model):
-    table_id = models.CharField(max_length=3)
+class Customer(models.Model):
+    table = models.CharField(max_length=3)
     password = models.CharField(max_length=16)
 
 class Order(models.Model):
@@ -15,6 +15,7 @@ class Order(models.Model):
 
 class SingleOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+	#table = models.ForeignKey(Customer, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     temp_choices = (
         ("iced", "正常冰"),
@@ -31,10 +32,10 @@ class SingleOrder(models.Model):
     sugar = models.CharField(max_length=4, choices=sugar_choices)
     count = models.IntegerField()
     status_choices = (
-        ("ongoing", "未送出"),
-        ("submitted", "已送出"),
-        ("payed", "已付款"),
-        ("done", "已完成")
+        ("unsent", "未下單"),
+        ("unconfirmed", "服務生未確認"),
+		("confirmed", "服務生已確認"),
+        ("payed", "已付款")
     )
-    status = models.CharField(max_length=4, choices=status_choices, default="ongoing")
+    status = models.CharField(max_length=4, choices=status_choices, default="unsent")
     # comment = models.CharField(max_length=100, blank=True)

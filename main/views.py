@@ -41,7 +41,13 @@ def order(request):
 
 def check(request):
 	target_order_id = 1
-	orders = SingleOrder.objects.filter(order_id=target_order_id, status='ongoing')
+
+	try:
+		SingleOrder.objects.get(pk=request.POST['order_id']).delete()
+	except:
+		pass
+
+	orders = SingleOrder.objects.filter(order_id=target_order_id, status='unsent')
 	for single_order in orders:
 		single_order.temp = temp_match[single_order.temp]
 		single_order.sugar = sugar_match[single_order.sugar]
@@ -58,18 +64,16 @@ def result(request):
 	target_order_id = 1
 	if request.method == 'POST':
 		print("Order Success!")
-		ack_msg = "已成功點餐"
-		new_orders = SingleOrder.objects.filter(order_id=target_order_id, status='ongoing')
-		for single_order in new_orders:
-			single_order.status = "submitted"
-	orders = SingleOrder.objects.filter(order_id=target_order_id, status='submitted')
+		new_orders = SingleOrder.objects.filter(order_id=target_order_id, status='unsent')
+		new_orders.update(status='unconfirmed')
+
+	orders = SingleOrder.objects.filter(order_id=target_order_id, status='unconfirmed')
 	for single_order in orders:
 		single_order.temp = temp_match[single_order.temp]
 		single_order.sugar = sugar_match[single_order.sugar]
 
 	ack_msg = ""
 	# TODO check if the order is done
-
 
 	number_of_list = len(orders)
 	arg = {'order': orders,
