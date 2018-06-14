@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<!--
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="zh-Hant-TW">
+	<head>
+		<title>CNL咖啡[管理頁面]</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		{% load static %}
+		<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
+	</head>
+	<body>
+
+		<!-- Header:置頂欄 -->
+			<header id="header">
+				<a href="{% url 'manage' %}" class="logo">CNL café</a>
+			</header>
+
+		<!-- Login Form -->
+		<section class="wrapper">
+			<div class="inner centered-title">
+				<h2>桌號</h2>
+			</div>
+			{% for range in range5 %}
+			<div class="inner flex flex">
+				{% for i in range %}
+				<form method="post" action="{% url 'manage' %}">
+					{% csrf_token %}
+					<input type="hidden" name="{{ i }}" value="{{ i }}">
+					<input type="submit" value="{{ i }}">
+				</form>
+				{% endfor %}
+			</div>
+			{% endfor %}
+		</section>
+
+
+		<!-- Scripts -->
+			{% load static %}
+			<script src="{% static "assets/js/jquery.min.js" %}"></script>
+			<script src="{% static "assets/js/jquery.scrolly.min.js" %}"></script>
+			<script src="{% static "assets/js/skel.min.js" %}"></script>
+			<script src="{% static "assets/js/util.js" %}"></script>
+			<script src="{% static "assets/js/main.js" %}"></script>
+
+	</body>
+</html>

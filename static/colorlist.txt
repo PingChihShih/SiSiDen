@@ -6,6 +6,7 @@
 
 -* original from templated *-
   kind of water blue #25a2c3
+  heading-used blue #727a82;
   grey #767d85
   grey2 #dee1e3
   orange #f6755e

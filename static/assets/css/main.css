@@ -92,6 +92,12 @@
     text-align:center;
 	}
 
+	div.centered-title { /* add by DS */
+		height:80px;
+    width:200px;
+    text-align:center;
+	}
+
 	@media screen and (max-width: 1680px) {
 
 		.container.\31 25\25 {
@@ -1679,7 +1685,7 @@
 		}
 
 	a {
-		color: #25a2c3;
+		color: #78300f;
 		text-decoration: underline;
 	}
 
@@ -1688,7 +1694,7 @@
 		}
 
 	strong, b {
-		color: #727a82;
+		color: #78300f;
 		font-weight: 700;
 	}
 
@@ -1701,7 +1707,7 @@
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #727a82;
+		color: #78300f; /* mod by DS */
 		font-weight: 700;
 		font-family: "Montserrat", sans-serif;
 		line-height: 1.5;
@@ -1824,7 +1830,7 @@
 	}
 
 	header p {
-		color: #bbb;
+		color: #78300f;
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
@@ -1858,7 +1864,7 @@
 	}
 
 	label {
-		color: #727a82;
+		color: #78300f;
 		display: block;
 		font-size: 0.9em;
 		font-weight: 700;
@@ -1919,8 +1925,8 @@
 		input[type="tel"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #25a2c3;
-			box-shadow: 0 0 0 1px #25a2c3;
+			border-color: #78300f;
+			box-shadow: 0 0 0 1px #78300f;
 		}
 
 	.select-wrapper {
@@ -2031,8 +2037,8 @@
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #25a2c3;
-			box-shadow: 0 0 0 1px #25a2c3;
+			border-color: #78300f;
+			box-shadow: 0 0 0 1px #78300f;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -2075,6 +2081,7 @@
 		border: solid 1px #dee1e3;
 		margin-bottom: 2em;
 		overflow: hidden;
+		/* TODO make form in box align bottom */
 	}
 
 		.box > :last-child,
@@ -2379,7 +2386,7 @@
 		}
 
 		table th {
-			color: #727a82;
+			color: #78300f;
 			font-size: 0.9em;
 			font-weight: 700;
 			padding: 0 0.75em 0.75em 0.75em;
@@ -2530,7 +2537,7 @@
 		.button.alt {
 			background-color: #c9b0ac;
 			box-shadow: inset 0 0 0 1px #dee1e3;
-			color: #727a82 !important;
+			color: #78300f !important;
 		}
 
 			input[type="submit"].alt:hover,
@@ -2562,7 +2569,7 @@
 		input[type="button"].special,
 		button.special,
 		.button.special {
-			background-color: #25a2c3;
+			background-color: #78300f;
 			color: #ffffff !important;
 		}
 
@@ -2679,7 +2686,7 @@
 	}
 
 		.wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5 {
-			color: #25a2c3;
+			color: #78300f;
 		}
 
 		.wrapper.style1 {
@@ -2990,7 +2997,7 @@
 
 		#banner h1 {
 			font-size: 3em;
-			color: #25a2c3;
+			color: #78300f;
 			line-height: 1em;
 			margin: 0 0 0.5em 0;
 			padding: 0;
@@ -3189,7 +3196,7 @@
 
 	#footer {
 		padding: 6em 0 4em 0;
-		background: #25a2c3; /* todo */
+		background: #78300f; /* todo */
 		text-align: center;
 		color: #c8e7f0;
 	}
