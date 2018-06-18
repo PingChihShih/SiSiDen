@@ -17,7 +17,7 @@
 		<!-- Header:置頂欄 -->
 			<header id="header">
 				<nav class="left">
-					<p>桌號: {{ show_table }}</p>
+					<p>桌號: {{ table }}</p>
 				</nav>
 				<a href="{% url 'manage' %}" class="logo">CNL café</a>
         <nav class="right">
@@ -35,6 +35,7 @@
 								<th scope="col">冷熱</th>
 								<th scope="col">甜度</th>
 								<th scope="col">數量</th>
+								<th scope="col">餐點狀態</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
@@ -47,8 +48,11 @@
 									<td>{{ single_order.temp }}</td>
 									<td>{{ single_order.sugar }}</td>
 									<td>{{ single_order.count }}</td>
+									<td>{{ single_order.status }}</td>
 									<input type="hidden" name="order_id" value="{{single_order.id}}">
+									{% if single_order.status == unconfirmed %}
 									<td><a href="javascript:{}" onclick="document.getElementById('check_form').submit(); return false;">取消</a></td>
+									{% endif %}
 								</form>
 							</tr>
 							{% endfor %}
@@ -64,7 +68,7 @@
 						{% csrf_token %}
 						<center>
 							<div class="inner centered">
-								<input type="hidden" name="table" value="{{ table }}">
+								<input type="hidden" name="table_no" value="{{ table }}">
 								<input type="submit" value="確認送出">
 							</div>
 						</center>

@@ -28,4 +28,5 @@ class TableForm(forms.Form):
     password = forms.CharField(max_length=16,
         widget=forms.TextInput(attrs={'id': 'password',
                                       'placeholder':'請輸入密碼',
-                                      'class': 'centered-input'}))
+                                      'class': 'centered-input',
+                                      'type': 'password'}))

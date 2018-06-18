@@ -102,7 +102,7 @@ def result(request):
 		new_orders = SingleOrder.objects.filter(order_id=table, status='unsent')
 		new_orders.update(status='unconfirmed')
 
-	orders = SingleOrder.objects.filter(order_id=table, status='unconfirmed')
+	orders = SingleOrder.objects.filter(order_id=table).exclude(status='unsent')
 	for single_order in orders:
 		single_order.temp = temp_match[single_order.temp]
 		single_order.sugar = sugar_match[single_order.sugar]
@@ -110,7 +110,8 @@ def result(request):
 
 	number_of_list = len(orders)
 	arg = {'order': orders,
-		   'number_of_list': number_of_list,}
+		   'number_of_list': number_of_list,
+		   'table': table}
 	return render(request, 'result.html', arg)
 
 def manage(request):
@@ -121,19 +122,38 @@ def manage(request):
 		range5.append(ranges[i*5:(i+1)*5])
 
 	r = []
+	table = 0
+	update = False
 	if request.method == 'POST':
 		# get table number
-		for i in range(13):
-			try:
-				print(request.POST[str(i+1)])
-				table = i+1
-			except:
-				pass
+		try:
+			if request.POST['table_no']:
+				print("MODE: status confirmed")
+				update = True
+				table = request.POST['table_no']
+		except:
+			pass
+		if not update:
+			print("MODE: select table")
+			for i in range(13):
+				try:
+					print(request.POST[str(i+1)])
+					table = i+1
+				except:
+					pass
 		r = SingleOrder.objects.filter(order_id=table).exclude(status="payed").exclude(status="unsent")
+		if update:
+			print("Table", table, "order updated")
+			r.filter(status="unconfirmed").update(status='confirmed')
+		for single_order in r:
+			single_order.temp = temp_match[single_order.temp]
+			single_order.sugar = sugar_match[single_order.sugar]
+			single_order.status = status_match[single_order.status]
 		number_of_list = len(r)
 		arg = {'order': r,
-			   'show_table': table,
-			   'number_of_list': number_of_list}
+			   'table': table,
+			   'number_of_list': number_of_list,
+			   'unconfirmed': "未確認"}
 		return render(request, 'manage_result.html', arg)
 
 	arg = {'range5': range5,}
