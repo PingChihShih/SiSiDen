@@ -24,20 +24,24 @@
 			<div class="inner centered-title">
 				<h2>桌號</h2>
 			</div>
-			<div class="inner centered-title">
-				<h2>New</h2>
-				{% for unconfirmed in new_notify%}
-				<a> {{unconfirmed}}</a>
-				{% endfor %}
-			</div>
 			{% for range in range5 %}
 			<div class="inner flex flex">
 				{% for i in range %}
-				<form method="post" action="{% url 'manage' %}">
-					{% csrf_token %}
-					<input type="hidden" name="{{ i }}" value="{{ i }}">
-					<input type="submit" value="{{ i }}">
+				{% if i.new %}
+					<div class="alert" >
+						<form class="alert" method="post" action="{% url 'manage' %}">
+							{% csrf_token %}
+							<input type="hidden" name="{{ i.table }}" value="{{ i.table }} ">
+							<input type="submit" value="{{ i.table }} !">
+						</form>
+					</div>
+				{% else%}
+					<form method="post" action="{% url 'manage' %}">
+						{% csrf_token %}
+						<input type="hidden" name="{{ i.table }}" value="{{ i.table }}">
+						<input type="submit" value="{{ i.table }}">
 				</form>
+				{% endif %}
 				{% endfor %}
 			</div>
 			{% endfor %}

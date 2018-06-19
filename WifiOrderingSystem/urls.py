@@ -21,11 +21,12 @@ from main.views import login
 from main.views import order
 from main.views import check
 from main.views import result
-from main.views import manage
+from main.views import manage, delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', order, name='index'),
+    path('delete', delete, name='delete'),
     path('login', login, name='login'),
     path('order', order, name='order'),
     path('check', check, name='check'),

@@ -114,8 +114,10 @@ def result(request):
 
 	if request.method == 'POST':
 		print("Order Success!")
+		print(request.POST)
 		new_orders = SingleOrder.objects.filter(order_id=request.user.username, status='unsent')
 		new_orders.update(status='unconfirmed')
+		print(new_orders)
 
 	orders = SingleOrder.objects.filter(order_id=request.user.username).exclude(status='unsent')
 	for single_order in orders:
@@ -129,6 +131,15 @@ def result(request):
 		   'table': request.user.username}
 	return render(request, 'result.html', arg)
 
+def delete(request):
+	print("delete")
+	try:
+		SingleOrder(id=request.POST['order_id']).delete()
+	except:
+		pass
+
+	return redirect("manage")
+
 def manage(request):
 	if not request.user.is_superuser:
 		raise PermissionDenied
@@ -136,13 +147,15 @@ def manage(request):
 	ranges = [i+1 for i in range(13)]
 	range5 = []
 	n = len(ranges)//5 + 1 if ((len(ranges)%5) != 0) else 0
-	for i in range(n):
-		range5.append(ranges[i*5:(i+1)*5])
 	new_notify = []
 	# notify new orders
 	for i in range(1, 13):
-		if SingleOrder.objects.filter(order_id=i, status='confirmed'):
+		if SingleOrder.objects.filter(order_id=i, status__in=['confirmed', 'unconfirmed']):
 			new_notify.append(i)
+
+	for i in range(n):
+		range5.append([{'table': index, 'new': index in new_notify } for index in ranges[i*5:(i+1)*5]])
+
 
 
 	r = []
@@ -157,6 +170,7 @@ def manage(request):
 				table = request.POST['table_no']
 		except:
 			pass
+		print(request.POST)
 		if not update:
 			print("MODE: select table")
 			for i in range(13):
@@ -174,7 +188,8 @@ def manage(request):
 			single_order.sugar = sugar_match[single_order.sugar]
 			single_order.status = status_match[single_order.status]
 		number_of_list = len(r)
-		arg = {'order': r,
+		print([i.as_dict() for i in r])
+		arg = {'order': [i.as_dict() for i in r],
 			   'table': table,
 			   'number_of_list': number_of_list,
 			   'unconfirmed': "未確認"}

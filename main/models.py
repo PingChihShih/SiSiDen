@@ -99,4 +99,15 @@ class SingleOrder(models.Model):
         ("payed", "已付款")
     )
     status = models.CharField(max_length=4, choices=status_choices, default="unsent")
+
+    def as_dict(self):
+        return {
+            "name": self.name,
+            "temp": self.temp,
+            "sugar": self.sugar,
+            "count": self.count,
+            "status": self.status,
+            "id": self.pk,
+            "confirmed": self.status == '已確認(待處理)',
+    }
     # comment = models.CharField(max_length=100, blank=True)

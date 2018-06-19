@@ -42,7 +42,7 @@
 						<tbody>
 							{% for single_order in order %}
 							<tr>
-								<form id="check_form" method="post" action="{% url 'manage' %}">
+								<form id="check_form" method="post" action="{% url 'delete' %}">
 									{% csrf_token %}
 									<td>{{ single_order.name }}</td>
 									<td>{{ single_order.temp }}</td>
@@ -50,8 +50,8 @@
 									<td>{{ single_order.count }}</td>
 									<td>{{ single_order.status }}</td>
 									<input type="hidden" name="order_id" value="{{single_order.id}}">
-									{% if single_order.status == unconfirmed %}
-									<td><a href="javascript:{}" onclick="document.getElementById('check_form').submit(); return false;">取消</a></td>
+									{% if single_order.confirmed %}
+									<td><a asdasdasd href="javascript:{}" onclick="document.getElementById('check_form').submit(); return false;">結帳</a></td>
 									{% endif %}
 								</form>
 							</tr>
