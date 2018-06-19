@@ -25,7 +25,7 @@ SECRET_KEY = 'hfoi!1i^to8$(5!5=u_7-9-@crav48v%#@(_&o6gzbr7_7%@+c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.*', '192.168.1.124', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sslserver',
     'main'
 ]
 
