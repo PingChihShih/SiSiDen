@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from .models import Item, SingleOrder
 from .forms import SingleOrderForm, TableForm
+from django.http import HttpResponseForbidden
+from django.core.exceptions import PermissionDenied
+
+from django.contrib import auth
+from django.shortcuts import redirect
 
 temp_match = {
 	"iced": "正常冰",
@@ -24,9 +29,24 @@ status_match = {
 table = 13
 
 def login(request):
+	if request.method == 'POST':
+		user = auth.authenticate(username=request.POST['table'], password=request.POST['password'])
+		print(request.POST['table'], request.POST['password'])
+		print(user)
+		if user:
+			auth.login(request, user)
+			if user.is_superuser:
+				return redirect('manage')
+			return redirect('order')
+
 	return render(request, 'login.html', {'form': TableForm()})
 
 def order(request):
+	if not request.user.is_active:
+		print(request.user)
+		return redirect('login')
+	else:
+		print(request.user)
 	global table
 	# item: 顯示的物品名稱和敘述
 	# single_order: 從單一個form get的資訊
@@ -39,13 +59,6 @@ def order(request):
 		item3s.append(items[i*3:(i+1)*3])
 
 	if request.method == 'POST':
-		# get info about table
-		try:
-			tform = TableForm(request.POST)
-			print(tform) # no this line not work, but not important...
-			table = tform.cleaned_data['table']
-		except:
-			pass
 
 		form = SingleOrderForm(request.POST)
 		if form.is_valid():
@@ -58,7 +71,7 @@ def order(request):
 			single_order.temp = form.cleaned_data['temp']
 			single_order.sugar = form.cleaned_data['sugar']
 			single_order.count = form.cleaned_data['count']
-			single_order.order_id = table
+			single_order.order_id = request.user.username
 			single_order.save()
 
 	forms = []
@@ -68,13 +81,13 @@ def order(request):
 
 	arg = {'form': form,
 		   'item3s': item3s,
-		   'table': table}
+		   'table': request.user.username}
 
 	return render(request, 'order.html', arg)
 
 def check(request):
-	global table
-
+	if not request.user.is_active:
+		return redirect('login')
 	# delete single_order
 	try:
 		SingleOrder.objects.get(pk=request.POST['order_id']).delete()
@@ -82,7 +95,7 @@ def check(request):
 		pass
 
 	# show list of unsent single_order
-	orders = SingleOrder.objects.filter(order_id=table, status='unsent')
+	orders = SingleOrder.objects.filter(order_id=request.user.username, status='unsent')
 	for single_order in orders:
 		single_order.temp = temp_match[single_order.temp]
 		single_order.sugar = sugar_match[single_order.sugar]
@@ -92,17 +105,19 @@ def check(request):
 	arg = {'order': orders,
 		   'number_of_list': number_of_list,
 		   'form': form,
-		   'table': table}
+		   'table': request.user.username}
 	return render(request, 'check.html', arg)
 
 def result(request):
-	global table
+	if not request.user.is_active:
+		return redirect('login')
+
 	if request.method == 'POST':
 		print("Order Success!")
-		new_orders = SingleOrder.objects.filter(order_id=table, status='unsent')
+		new_orders = SingleOrder.objects.filter(order_id=request.user.username, status='unsent')
 		new_orders.update(status='unconfirmed')
 
-	orders = SingleOrder.objects.filter(order_id=table).exclude(status='unsent')
+	orders = SingleOrder.objects.filter(order_id=request.user.username).exclude(status='unsent')
 	for single_order in orders:
 		single_order.temp = temp_match[single_order.temp]
 		single_order.sugar = sugar_match[single_order.sugar]
@@ -111,15 +126,24 @@ def result(request):
 	number_of_list = len(orders)
 	arg = {'order': orders,
 		   'number_of_list': number_of_list,
-		   'table': table}
+		   'table': request.user.username}
 	return render(request, 'result.html', arg)
 
 def manage(request):
+	if not request.user.is_superuser:
+		raise PermissionDenied
+
 	ranges = [i+1 for i in range(13)]
 	range5 = []
 	n = len(ranges)//5 + 1 if ((len(ranges)%5) != 0) else 0
 	for i in range(n):
 		range5.append(ranges[i*5:(i+1)*5])
+	new_notify = []
+	# notify new orders
+	for i in range(1, 13):
+		if SingleOrder.objects.filter(order_id=i, status='confirmed'):
+			new_notify.append(i)
+
 
 	r = []
 	table = 0
@@ -156,5 +180,5 @@ def manage(request):
 			   'unconfirmed': "未確認"}
 		return render(request, 'manage_result.html', arg)
 
-	arg = {'range5': range5,}
+	arg = {'range5': range5, 'new_notify': new_notify}
 	return render(request, 'manage_table.html', arg)
